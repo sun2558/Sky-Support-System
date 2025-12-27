@@ -1,1 +1,10 @@
-determination+"昨晚我调试loader.py从8：10左右调试到11点左右"
+determination+"昨晚我调试loader.py从8:10左右调试到11点左右"
+这是一个气象数据的预览，包含：
+
+timestamp: 时间戳(2025年1月1日的小时数据)
+
+temperature: 温度（摄氏度）
+
+humidity: 湿度（百分比）
+
+今天晚上"loader.py"套用"中国天气网"csv代码验证成功

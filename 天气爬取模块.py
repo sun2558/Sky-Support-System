@@ -68,7 +68,7 @@ def get_weather_data(city_code):
                 print(f"解析某天数据时出错: {e}")
                 continue
     else:
-        print("未找到7天天气预报数据，尝试查找其他结构...")
+        print("未找到7天天气预报数据,尝试查找其他结构...")
         # 可以添加其他数据结构的解析逻辑
     
     return final_data, city_name
@@ -99,3 +99,64 @@ if __name__ == '__main__':
         print("2. 网页结构发生变化")
         print("3. 网络连接问题")
         print("4. 网站反爬虫机制")
+
+class WeatherCrawler:
+    """天气数据采集器 - 天擎系统专用模块"""
+    
+    def __init__(self, config=None):
+        # 保持你现有配置，增加扩展性
+        self.config = config or {
+            'timeout': 30,
+            'retry_times': 3,
+            'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+        self.quality_checker = None  # 为明天的3σ检测预留
+    
+    def fetch_weather(self, city_code, save_to_csv=True):
+        """
+        获取天气数据 - 直接重用你验证过的代码
+        """
+        # 直接调用你上面已经写好的函数！
+        data, city_name = get_weather_data(city_code)
+        
+        # 保持你原有的保存逻辑
+        if save_to_csv and data:
+            write_to_csv(data, city_name)
+            
+        return data, city_name
+    
+    def batch_fetch(self, city_codes):
+        """批量获取多个城市数据 - 新增功能"""
+        results = {}
+        for code in city_codes:
+            print(f"正在获取城市 {code} 的数据...")
+            results[code] = self.fetch_weather(code, save_to_csv=False)
+        return results
+
+# ==================== 测试新旧架构共存 ====================
+
+if __name__ == '__main__':
+    print("\n" + "="*50)
+    print("天擎系统天气模块测试")
+    print("="*50)
+    
+    # 测试1：你原来的方式（确保不破坏）
+    print("=== 测试原有函数 ===")
+    data, city = get_weather_data('101090114')
+    print(f"✅ 原有函数正常: {city} - {len(data)}天数据")
+    
+    # 测试2：新的类方式
+    print("\n=== 测试新架构 ===")
+    crawler = WeatherCrawler()
+    data, city = crawler.fetch_weather('101090114')
+    print(f"✅ 新架构正常: {city} - {len(data)}天数据")
+    
+    # 测试3：批量功能
+    print("\n=== 测试批量获取 ===")
+    cities = ['101090114', '101010100']  # 鹿泉区 + 北京
+    results = crawler.batch_fetch(cities)
+    for code, (data, name) in results.items():
+        if data:
+            print(f"✅ {name}: {len(data)}天数据")
+        else:
+            print(f"❌ {name}: 获取失败")
