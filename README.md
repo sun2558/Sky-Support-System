@@ -19,7 +19,7 @@
 - 项目基于Python科学计算生态构建，其主要技术组件包括：
 - **数据处理**： Pandas，Numpy，Xarray
 - **机器学习**： Scikit-learn，TensorFlow/PyTorch
-- **可视化**： Matplotlib，Plotly，Streamlit
+- **可视化**： Matplotlib，Plotly，Vue+Echarts+
 - **气象专业**: MetPy，Cartopy
 - **数据库**：MySQL
 
