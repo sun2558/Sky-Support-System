@@ -23,7 +23,7 @@
 - **气象专业**: MetPy，Cartopy
 - **数据库**：MySQL
 
-- **Java**Java生态用于与Python生态相辅相成
+- **Java**：Java生态用于与Python生态相辅相成
 
 - ## 项目结构
 - 天擎/
