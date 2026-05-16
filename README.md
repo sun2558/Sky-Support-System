@@ -23,6 +23,8 @@
 - **气象专业**: MetPy，Cartopy
 - **数据库**：MySQL
 
+- java生态用于与Python生态相辅相成
+
 - ## 项目结构
 - 天擎/
 -tianqing-system/
